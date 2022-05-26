@@ -6,11 +6,14 @@
 #    By: gdominic <gdominic@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 13:12:52 by gdominic          #+#    #+#              #
-#    Updated: 2022/05/25 18:48:10 by gdominic         ###   ########.fr        #
+#    Updated: 2022/05/26 18:31:19 by gdominic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c \
@@ -25,10 +28,12 @@ SRCBONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 		   ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
 
-OBJS = ${SRC:.c=.o}
+OBJS = ${SRC:.c=.o} 
 OBJBONUS = ${SRCBONUS:.c=.o}
 
 DEPS = libft.h 
+
+.c.o: ${CC} ${CFLAGS} -I ${DEPS} -c $< -o ${<:.c=.o}
 
 all: $(NAME)
 
@@ -37,7 +42,7 @@ $(NAME): $(OBJS) $(DEPS)
 	@ranlib ${NAME}
 	@echo Archive\ created!!
 
-bonus: ${OBJS} ${OBJBONUS}
+bonus: ${OBJS} ${OBJBONUS} ${DEPS}
 	@ar rcs ${NAME} ${OBJS} ${OBJBONUS}
 	@ranlib ${NAME}
 	@touch $@
