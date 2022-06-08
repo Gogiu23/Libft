@@ -6,7 +6,7 @@
 #    By: gdominic <gdominic@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 13:12:52 by gdominic          #+#    #+#              #
-#    Updated: 2022/05/26 18:31:19 by gdominic         ###   ########.fr        #
+#    Updated: 2022/05/27 16:54:26 by gdominic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ OBJBONUS = ${SRCBONUS:.c=.o}
 
 DEPS = libft.h 
 
-.c.o: ${CC} ${CFLAGS} -I ${DEPS} -c $< -o ${<:.c=.o}
+%.o: %.c $(DEPS)
+	${CC} ${CFLAGS} -I ${DEPS} -c $< -o $@
 
 all: $(NAME)
 
